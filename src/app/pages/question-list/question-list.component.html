@@ -1,13 +1,16 @@
-<div class="container">
-  <h1>Question List</h1>
-  <div class="row">
-    <div class="col-md-6">
+<div class="main-container frame-container">
+  <h1 class="title-text">Questions List</h1>
+  <div class="d-flex gap-5 mb-5">
+    <button class="btn btn-dark" [routerLink]="['/question-management']">Back to management page</button>
+    <button class="btn btn-outline-dark" [routerLink]="['/create-question']">Create new Question</button>
+  </div>
+  <div class="row w-100">
 
-      <h2>Unanswered Questions</h2>
+    <div class="col-md-6">
+      <h2 class="category-text">Unanswered Questions</h2>
       <div class="card mb-3" *ngFor="let question of unansweredQuestions  | sortByDate">
         <div class="card-body">
           <h5 class="card-title">{{ question.text }}</h5>
-          <p class="card-text">Type: {{ question.type }}</p>
           <div *ngIf="question.type === questionType.Text">
             <input type="text" class="form-control" [(ngModel)]="answerText[question.id]" placeholder="Enter your answer">
           </div>
@@ -24,28 +27,26 @@
               <label class="form-check-label">{{ option }}</label>
             </div>
           </div>
-          <button class="btn btn-primary mt-2" [disabled]="!canAnswer(question)" (click)="answerQuestion(question)">Answer</button>
-          <button class="btn btn-primary mt-2" [routerLink]="'../question-edit/' + question.id">Edit</button>
+          <div class="d-flex gap-5 justify-content-center">
+            <button class="btn mt-2 w-100 btn-dark" [disabled]="!canAnswer(question)" (click)="answerQuestion(question)">Answer</button>
+            <button class="btn mt-2 w-100 btn-outline-dark" [routerLink]="'../question-edit/' + question.id">Edit</button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="col-md-6">
-      <h2>Answered Questions</h2>
+      <h2 class="category-text" >Answered Questions</h2>
       <div class="card mb-3" *ngFor="let question of answeredQuestions  | sortByDate">
-        <div class="card-body">
+        <div class="card-body card-container">
           <h5 class="card-title">{{ question.text }}</h5>
-          <p class="card-text">Type: {{ question.type }}</p>
           <div>
             <p>Your answer: {{ getAnswer(question) }}</p>
-            <button class="btn btn-danger" (click)="deleteAnswer(question)">Delete Answer</button>
+            <button class="btn btn-outline-dark" (click)="deleteAnswer(question)">Delete Answer</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="mt-3">
-    <button class="btn btn-success mr-2" [routerLink]="['/create-question']">Create new Question</button>
-    <button class="btn btn-secondary" [routerLink]="['/question-management']">Back to management page</button>
-  </div>
+
 </div>

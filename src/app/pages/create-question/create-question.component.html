@@ -1,25 +1,34 @@
-<div class="container">
-  <h1>Create Question</h1>
+<div class="main-container frame-container">
+  <h1 class="title-text">Create Question</h1>
   <form (ngSubmit)="onCreate()">
+
     <div class="mb-3">
-      <label for="questionText" class="form-label">Question Text</label>
-      <input type="text" class="form-control" id="questionText" name="questionText" required [(ngModel)]="question.text">
+      <label class="form-label fw-semibold">Question Text</label>
+      <input type="text" class="form-control" autocomplete="off"
+             name="questionText" placeholder="How to work in Pageloot?" required [(ngModel)]="question.text">
       <div class="invalid-feedback" *ngIf="!question.text && errorMessage">Question text is required</div>
     </div>
     <div class="mb-3">
-      <label for="questionType" class="form-label">Question Type</label>
+      <label for="questionType" class="form-label fw-semibold">Question Type</label>
       <select class="form-select" id="questionType" name="questionType" required [(ngModel)]="selectedQuestionType">
         <option value="{{ questionType.Multiple }}">Multiple Choice</option>
         <option value="{{ questionType.Single }}">Single Choice</option>
         <option value="{{ questionType.Text }}">Text</option>
       </select>
     </div>
+
     <div class="mb-3" id="optionsContainer" *ngIf="selectedQuestionType === questionType.Multiple || selectedQuestionType === questionType.Single">
-      <label for="options" class="form-label">Options</label>
-      <input type="text" class="form-control" id="options" name="options" [(ngModel)]="options">
+      <label for="options" class="form-label fw-semibold">Options</label>
+      <input type="text" class="form-control" id="options" name="options"
+             [(ngModel)]="options" autocomplete="off" placeholder="Variant A, Variant B, Idk">
       <div class="form-text">Enter options separated by commas</div>
-      <div class="invalid-feedback" *ngIf="(selectedQuestionType === questionType.Multiple || selectedQuestionType === questionType.Single) && options && options.split(',').length < 2">At least two options are required for multiple or single choice questions</div>
+      <div class="invalid-feedback" *ngIf="(selectedQuestionType === questionType.Multiple || selectedQuestionType === questionType.Single)
+       && options && options.split(',').length < 2">At least two options are required for multiple or single choice questions</div>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <div class="d-flex justify-content-center align-items-center w-100 flex-column gap-2 mt-4">
+      <button class="btn btn-outline-dark" [routerLink]="['/question-management']">Back to management page</button>
+      <button type="submit" class="btn btn-dark button-question">Create</button>
+    </div>
+
   </form>
 </div>

@@ -101,7 +101,7 @@ export class QuestionListComponent implements OnInit {
     if (question.type === QuestionType.Text) {
     return !!this.answerText[question.id]
     } else if (question.type === QuestionType.Single) {
-      return !!this.answerSingle[question.id]
+      return !!this.answerSingle[question.id] || this.answerSingle[question.id] === 0
     } else {
       const optionIndexes = this.answerMultiple[question.id]
       return !!optionIndexes?.length

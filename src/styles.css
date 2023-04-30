@@ -1,4 +1,38 @@
 @import "bootstrap";
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.frame-container {
+  padding: 4%;
+  margin: 5%;
+  box-shadow: 0 5px 34px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
 .title-text {
-  margin: 5% 0 3% 0;
+  margin: 0 0 3% 0;
+  background: black;
+  color: white;
+  width: 30%;
+  text-align: center;
+  transition: 200ms ease-in-out;
+
+}
+
+.title-text:hover {
+  padding: 10px;
+  transition: 200ms ease-in-out;
+  background: white;
+  color: black;
+  border: solid black 1px;
+  transform: scale(1.1);
+}
+
+.button-question {
+  width: 100%;
 }
