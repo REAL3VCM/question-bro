@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Question Management Page</h1>
+  <div class="mt-3 mb-3">
+    <button class="btn btn-secondary" [routerLink]="['/question-list']">Go to list</button>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-3" *ngFor="let question of questions | sortByDate">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ question.text }}</h5>
+          <p class="card-text">Type: {{ question.type }}</p>
+          <p class="card-text">Created on: {{ question.creationDate | date }}</p>
+          <ul class="list-group" *ngIf="question.type === QuestionType.Multiple || question.type === QuestionType.Single">
+            <li class="list-group-item" *ngFor="let option of question.options">{{ option }}</li>
+          </ul>
+          <button class="btn btn-danger mr-2" (click)="deleteQuestion(question.id)">Delete</button>
+          <a class="btn btn-primary" [routerLink]="['/question-edit', question.id]">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button class="btn btn-success mr-2" [routerLink]="['/create-question']">Create new Question</button>
+  </div>
+</div>
